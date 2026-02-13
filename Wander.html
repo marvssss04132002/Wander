@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wander Game 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url("bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+    h1 {
+      color: #ff4da6;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #game {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      background: #fff;
+      border: 3px solid #ff99cc;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    #player {
+      width: 40px;
+      height: 40px;
+      background: pink;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #goal {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 24px;
+    }
+
+    .controls {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+    button {
+      padding: 15px;
+      font-size: 18px;
+      margin: 5px;
+      border: none;
+      border-radius: 15px;
+      background: #ff66b3;
+      color: white;
+    }
+
+    #question {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
+
+#question button {
+  display: block;
+  margin: 10px auto;
+}
+
+  </style>
+</head>
+<body>
+
+<h1>Wander to Unlock a Surprise 💌</h1>
+
+<div id="game">
+  <div id="player">💌</div>
+  <div id="goal">🎁</div>
+</div>
+
+<div class="controls">
+  <div>
+    <button onclick="move(0,-20)">⬆️</button>
+  </div>
+  <div>
+    <button onclick="move(-20,0)">⬅️</button>
+    <button onclick="move(0,20)">⬇️</button>
+    <button onclick="move(20,0)">➡️</button>
+  </div>
+</div>
+
+<div id="question">
+  <h2>Will you be my Valentine? 💘</h2>
+  <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+  <button id="noBtn" onclick="shrinkNo()">No 🙈</button>
+</div>
+
+
+<script>
+const player = document.getElementById("player");
+  const question = document.getElementById("question");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+
+let yesSize = 18;
+let noSize = 18;
+
+
+  let x = 0;
+  let y = 0;
+
+  function move(dx, dy) {
+    x += dx;
+    y += dy;
+
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x > 260) x = 260;
+    if (y > 260) y = 260;
+
+    player.style.left = x + "px";
+    player.style.top = y + "px";
+
+    checkWin();
+  }
+
+  function checkWin() {
+    if (x >= 240 && y >= 240) {
+      question.style.display = "block";
+    }
+  }
+   
+   function shrinkNo() {
+    noSize -= 3;
+    yesSize += 5;
+
+    if (noSize < 8) noSize = 8;
+
+    noBtn.style.fontSize = noSize + "px";
+    yesBtn.style.fontSize = yesSize + "px";
+  }
+
+  function sayYes() {
+    question.innerHTML = "<h2>Yay!! 💕 WHEN: February 15, 2026 @11pm ; WHERE: Messenger Call ; WHAT: PLAY SOME GAMES AND WATCH SOME ANIME </h2>";
+  }
+</script>
+
+</body>
+</html>
